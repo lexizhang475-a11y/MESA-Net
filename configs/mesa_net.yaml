@@ -1,0 +1,32 @@
+experiment_name: mesa_net_minimal_release
+device: cuda
+
+data:
+  kvasir_images_dir: data/Kvasir-SEG/images
+  kvasir_masks_dir: data/Kvasir-SEG/masks
+  clinicdb_images_dir: data/CVC-ClinicDB/images
+  clinicdb_masks_dir: data/CVC-ClinicDB/masks
+  colondb_images_dir: data/CVC-ColonDB/images
+  colondb_masks_dir: data/CVC-ColonDB/masks
+  polypgen_root_dir: data/PolypGen
+
+train:
+  seed: 42
+  batch_size: 16
+  num_workers: 4
+  epochs: 200
+  lr: 1.0e-4
+  weight_decay: 0.0
+  val_ratio: 0.2
+  save_dir: outputs
+  use_amp: true
+
+loss:
+  aux_weights: [0.3, 0.15]
+  boundary_weight: 0.05
+  distill_weight: 0.1
+  temperature: 4.0
+
+eval:
+  num_workers: 2
+  threshold: 0.5
